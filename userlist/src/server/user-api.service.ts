@@ -1,17 +1,15 @@
 import { Injectable, Signal, effect, signal } from '@angular/core';
 import { User } from '../models/user';
-import { Observable, of } from 'rxjs';
+import { Observable, map, of } from 'rxjs';
 import { ServerAPI } from './interfaces/server-api.interface';
 import { Delay } from './decorators/delay.decorator';
 import { EntityAdapter, EntityState, createEntityAdapter } from '@ngrx/entity';
-
+import { v4 as uuid4 } from 'uuid';
 function sortByName(a: User, b: User): number {
   return a.username.localeCompare(b.username);
 }
 
-function selectUserId(u: User): string {
-  return u.username;
-}
+
 
 const STORAGE_ITEM_NAME = 'userData';
 
@@ -19,7 +17,6 @@ const STORAGE_ITEM_NAME = 'userData';
 export class UserApiService implements ServerAPI<User> {
   private data = signal<EntityState<User> | null>(null);
   private adapter: EntityAdapter<User> = createEntityAdapter<User>({
-    selectId: selectUserId,
     sortComparer: sortByName,
   });
   private selectUserIds;
@@ -59,16 +56,30 @@ export class UserApiService implements ServerAPI<User> {
     return of(users.hasOwnProperty(id));
   }
 
+  @Delay(1000)
+  apiExistName(name: string): Observable<string | undefined> {
+    const state = this.data()!;
+    const users = this.selectUserAll(state);
+    const ind = users.findIndex(el=> el.username.toUpperCase().trim() === name.toUpperCase().trim());
+    if (ind === -1) {
+      return of(undefined);
+    }
+
+    return of(users[ind].id)
+  }
+
   @Delay()
-  apiGet(id: string): Observable<User> {
-    throw new Error('Method not implemented.');
+  apiGet(id: string): Observable<User| undefined> {
+    const state = this.data()!;
+    return of(this.selectUserEntities(state)[id])
   }
 
   @Delay()
   apiPost(item: User): Observable<User> {
+    item.id = uuid4();
     const state = this.data()!;
     this.data.set(this.adapter.addOne(item,state));
-    return this.apiGet(item.username);
+    return this.apiGet(item.id).pipe(map(el => el as User));
   }
 
   @Delay()
@@ -79,7 +90,7 @@ export class UserApiService implements ServerAPI<User> {
       changes: data
     }
     this.data.set(this.adapter.updateOne(changes,state))
-    return this.apiGet(!!data?.username ? data?.username : id);
+    return this.apiGet(id).pipe(map(el => el as User));
   }
 
   @Delay()

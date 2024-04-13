@@ -1,3 +1,26 @@
-<p>
-  user-list works!
-</p>
+
+<table style="min-width: 100%;">
+  <thead>
+    <th> USER NAME </th>
+    <th> FIRST NAME </th>
+    <th> LAST NAME </th>
+    <th> EMAIL </th>
+    <th> TYPE </th>
+  </thead>
+  <tbody>
+    @for(user of data(); track user.id) {
+      <tr (click)="OnRowClick(user)">
+        <td> {{ user.username }} </td>
+        <td> {{ user.first_name }} </td>
+        <td> {{ user.last_name }} </td>
+        <td> {{ user.email }} </td>
+        <td> {{ user.user_type }} </td>
+      </tr>
+    } @empty {
+      <div>
+        Nothing wos found ...
+      </div>
+
+    }
+  </tbody>
+</table>

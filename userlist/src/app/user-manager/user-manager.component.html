@@ -1,3 +1,43 @@
-<p>
-  user-manager works!
-</p>
+<div
+  style="
+    height: 50px;
+    align-items: center;
+    display: flex;
+    background-color: beige;
+    justify-content: end
+  "
+>
+  <button>Create</button>
+  <button (click)="toastService.succesMessage('succes')"> sucess</button>
+  <button (click)="toastService.errorMessage('error')"> fail</button>
+
+</div>
+
+<div style="display: flex">
+  <div style="width: 70%; padding-left: 7px">
+    <app-user-list [(selected)]="selectedUser"></app-user-list>
+  </div>
+  <div style="width: 30%">
+    <div
+      style="
+        height: 50px;
+        background-color: aliceblue;
+        display: flex;
+        justify-content: space-between;
+      "
+    >
+
+      @if(selectedUser(); as user) {
+      <strong style="margin-right: 7px"> {{ user.first_name }}</strong>
+      <strong> {{ user.last_name }} </strong>
+      }
+
+      <button>close</button>
+    </div>
+    <app-user-detail
+      (OnDataSubmited)="OnDataSubmited()"
+      [(user)]="selectedUser"
+      style="background-color: aliceblue"
+    ></app-user-detail>
+  </div>
+</div>

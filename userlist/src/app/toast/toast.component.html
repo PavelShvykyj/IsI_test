@@ -1,0 +1,5 @@
+@for (id of servise.ids; track $index) {
+  <div  (click)="servise.remove(id)" [ngClass]="servise.toasts.get(id)?.type === 'succes' ? 'succes': 'error'" class="toast">
+    {{ servise.toasts.get(id)?.message }}
+  </div>
+}

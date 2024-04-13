@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
-import { USER_API_PROVIDER } from './app.module';
+import { USER_API_PROVIDER } from '../app.module';
 import { Observable } from 'rxjs';
-import { User } from '../models/user';
+import { User } from '../../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -20,12 +20,12 @@ export class UserDataService {
     return this.apiProvider.apiDelete(name)
   }
 
-  EditUser(name: string, data: Partial<User>): Observable<User> {
-    return this.apiProvider.apiUpdate(name,data)
+  EditUser(id: string, data: Partial<User>): Observable<User> {
+    return this.apiProvider.apiUpdate(id,data)
   }
 
-  GetUserByName(name: string): Observable<User> {
-    return this.apiProvider.apiGet(name)
+  GetUser(id: string): Observable<User | undefined> {
+    return this.apiProvider.apiGet(id)
   }
 
   CreateUser(data: User): Observable<User> {
@@ -33,4 +33,7 @@ export class UserDataService {
   }
 
 
+  NameExists(name: string) : Observable<string | undefined> {
+    return this.apiProvider.apiExistName(name);
+  }
 }
