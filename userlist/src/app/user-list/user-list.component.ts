@@ -12,6 +12,7 @@ export class UserListComponent implements OnInit {
 
   data: WritableSignal<Array<User>> = signal([]);
   selected = model<User>();
+  showDetails = model<boolean>();
   userService = inject(UserDataService)
 
   constructor() { }
@@ -28,6 +29,7 @@ export class UserListComponent implements OnInit {
 
   OnRowClick(data: User) {
     this.selected.set(data);
+    this.showDetails.set(true);
   }
 
 }

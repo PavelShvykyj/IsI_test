@@ -16,8 +16,8 @@ export class UserDataService {
     return this.apiProvider.apiList()
   }
 
-  DeleteUser(name: string): Observable<boolean> {
-    return this.apiProvider.apiDelete(name)
+  DeleteUser(id: string): Observable<boolean> {
+    return this.apiProvider.apiDelete(id)
   }
 
   EditUser(id: string, data: Partial<User>): Observable<User> {

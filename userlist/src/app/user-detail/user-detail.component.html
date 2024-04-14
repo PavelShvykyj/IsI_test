@@ -1,43 +1,45 @@
 <form [formGroup]="formGroup" (ngSubmit)="Submit()">
-  <div style="margin-top: 4px; margin-bottom: 4px; background-color: azure;">
-    <label > login </label>
-    <input formControlName="username">
+  <div style="margin-top: 4px; margin-bottom: 4px; background-color: azure">
+    <label> login </label>
+    <input UniqueName [itemId]="userId()" formControlName="username" />
   </div>
 
-  <div style="margin-top: 4px; margin-bottom: 4px; background-color: azure;">
-    <label > First</label>
-    <input formControlName="first_name">
+  <div style="margin-top: 4px; margin-bottom: 4px; background-color: azure">
+    <label> First</label>
+    <input formControlName="first_name" />
   </div>
-  <div style="margin-top: 4px; margin-bottom: 4px; background-color: azure;">
-    <label >Last </label>
-    <input formControlName="last_name">
+  <div style="margin-top: 4px; margin-bottom: 4px; background-color: azure">
+    <label>Last </label>
+    <input formControlName="last_name" />
   </div>
-  <div style="margin-top: 4px; margin-bottom: 4px; background-color: azure;">
-    <label >Mail email</label>
-    <input type="email" formControlName="email">
-  </div>
-
-  <div style="margin-top: 4px; margin-bottom: 4px; background-color: azure;">
-    <label >Pass</label>
-    <input type="password" formControlName="password">
+  <div style="margin-top: 4px; margin-bottom: 4px; background-color: azure">
+    <label>Mail email</label>
+    <input type="email" formControlName="email" />
   </div>
 
-  <div style="margin-top: 4px; margin-bottom: 4px; background-color: azure;">
-    <label > Pass confirm </label>
-    <input type="password" formControlName="passwordConfirm">
+  <div passwordConfirm formGroupName="passwordGroup">
+    <div style="margin-top: 4px; margin-bottom: 4px; background-color: azure">
+      <label>Pass</label>
+      <input type="password" formControlName="password" />
+    </div>
+
+    <div style="margin-top: 4px; margin-bottom: 4px; background-color: azure">
+      <label> Pass confirm </label>
+      <input type="password" formControlName="passwordConfirm" />
+    </div>
   </div>
 
-  <div style="margin-top: 4px; margin-bottom: 4px; background-color: azure;">
-    <label > usser type </label>
-    <select   formControlName="user_type">
+  <div style="margin-top: 4px; margin-bottom: 4px; background-color: azure">
+    <label> usser type </label>
+    <select formControlName="user_type">
       <option value="Admin">Admin</option>
       <option value="Driver">Driver</option>
     </select>
   </div>
 
-  <button type="submit"> save </button>
-  <button type="reset"> retset </button>
-
-
+  <button type="submit">save</button>
+  @if(!!userId()) {
+    <button (click)="DeleteUser()">Delete</button>
+  }
 
 </form>

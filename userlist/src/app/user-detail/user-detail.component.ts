@@ -1,16 +1,12 @@
 import {
   Component,
   EventEmitter,
-  Input,
-  ModelSignal,
   OnInit,
   Output,
   computed,
   effect,
   inject,
-  input,
   model,
-  output,
 } from '@angular/core';
 import {
   FormBuilder,
@@ -22,7 +18,7 @@ import { User } from '../../models/user';
 import { usertype } from '../../types/user-type';
 import { UserDataService } from '../services/user-data.service';
 import { filter, take } from 'rxjs';
-import { UniqueNameValidator } from './validators/unique-name.validator';
+import { ToastService } from '../services/toast-service.service';
 
 @Component({
   selector: 'app-user-detail',
@@ -31,6 +27,7 @@ import { UniqueNameValidator } from './validators/unique-name.validator';
 })
 export class UserDetailComponent implements OnInit {
   user = model<User>();
+  showDetails = model<boolean>();
   userId = computed(() => {
     const user = this.user();
     if (!!user) {
@@ -38,38 +35,37 @@ export class UserDetailComponent implements OnInit {
     }
     return '';
   });
-
-
+  private toastService = inject(ToastService);
   private userservice = inject(UserDataService);
-  nameValidator = inject(UniqueNameValidator);
-
   private fb = inject(FormBuilder);
+
   formGroup: FormGroup = this.fb.group({
     id: [null],
-    username: ['', Validators.required],
+    username: ['', { validators: Validators.required, updateOn: 'blur' }],
     first_name: ['', Validators.required],
     last_name: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
-    password: [
-      '',
-      [
-        Validators.required,
-        Validators.minLength(2),
-        Validators.pattern(RegExp('^(?=.*[0-9])(?=.*[a-z])([a-z0-9_-]+)$')),
+    passwordGroup: this.fb.group({
+      password: [
+        '',
+        {
+          validators: [
+            Validators.required,
+            Validators.minLength(2),
+            Validators.pattern(RegExp('^(?=.*[0-9])(?=.*[a-z])([a-z0-9_-]+)$')),
+          ],
+          updateOn: 'blur',
+        },
       ],
-    ],
-    passwordConfirm: ['', Validators.required],
+      passwordConfirm: ['', Validators.required],
+    }),
     user_type: new FormControl<usertype>('Driver', [Validators.required]),
   });
 
   @Output()
-  OnDataSubmited = new EventEmitter()
+  OnDataSubmited = new EventEmitter();
 
   constructor() {
-    this.formGroup.addAsyncValidators([
-      this.nameValidator.validate.bind(this.nameValidator),
-    ]);
-
     effect(() => {
       const id = this.userId();
       if (!!id) {
@@ -80,10 +76,10 @@ export class UserDetailComponent implements OnInit {
             take(1)
           )
           .subscribe((userData) => {
-            this.formGroup.reset({ ...userData });
+            this.formGroup.reset({ ...userData }, { emitEvent: false });
           });
       } else {
-        this.formGroup.reset();
+        this.formGroup.reset({ emitEvent: false });
       }
     });
   }
@@ -91,10 +87,16 @@ export class UserDetailComponent implements OnInit {
   ngOnInit() {}
 
   Submit() {
+    if (this.formGroup.invalid) {
+      this.toastService.errorMessage('Form filled iccorrectly...');
+      return;
+    }
+
     let userData = { ...this.formGroup.getRawValue() };
     delete userData.passwordConfirm;
 
     let model: User = Object.assign(new User(), userData);
+    model.password = userData.passwordGroup.password;
     const id = this.userId();
 
     let submitresult$;
@@ -107,13 +109,39 @@ export class UserDetailComponent implements OnInit {
     submitresult$.pipe(take(1)).subscribe({
       next: (res) => {
         this.user.set(res);
+        this.toastService.succesMessage('Done');
       },
       error: (err) => {
-        console.log('error on submin', JSON.parse(err));
+        this.toastService.errorMessage('Errors on submit');
       },
-      complete: ()=> {
+      complete: () => {
         this.OnDataSubmited.emit();
-      }
+      },
     });
+  }
+
+  DeleteUser() {
+    const id = this.userId();
+    if (!!id) {
+      this.userservice
+        .DeleteUser(id)
+        .pipe(take(1))
+        .subscribe({
+          next: (res) => {
+            this.user.set(undefined);
+            this.toastService.succesMessage('Done');
+          },
+          error: (err) => {
+            this.toastService.errorMessage('Errors on deletion');
+          },
+          complete: () => {
+            this.OnDataSubmited.emit();
+          },
+        });
+    }
+  }
+
+  Close() {
+    this.showDetails.set(false);
   }
 }

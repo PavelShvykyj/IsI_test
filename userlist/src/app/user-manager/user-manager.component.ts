@@ -11,6 +11,8 @@ import { ToastService } from '../services/toast-service.service';
 export class UserManagerComponent implements OnInit {
 
   selectedUser = signal<User | undefined>(undefined)
+  showDetails = signal<boolean>(false);
+
   @ViewChild(UserListComponent)
   list: UserListComponent
   toastService = inject(ToastService)
@@ -22,5 +24,14 @@ export class UserManagerComponent implements OnInit {
 
   OnDataSubmited() {
     this.list.Refresh();
+  }
+
+  Create() {
+    this.selectedUser.set(undefined);
+    this.showDetails.set(true);
+  }
+
+  Close() {
+    this.showDetails.set(false);
   }
 }
