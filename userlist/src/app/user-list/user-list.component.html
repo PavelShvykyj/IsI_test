@@ -1,26 +1,64 @@
+<div style="display: flex">
+  <div style="min-width: 70%; padding-left: 7px">
+    <div
+      style="
+        height: 50px;
+        align-items: center;
+        display: flex;
+        background-color: beige;
+        justify-content: end;
+      "
+    >
+      <button (click)="Create()">Create</button>
+      <button (click)="toastService.succesMessage('succes')">sucess</button>
+      <button (click)="toastService.errorMessage('error')">fail</button>
+    </div>
 
-<table style="min-width: 100%;">
-  <thead>
-    <th> USER NAME </th>
-    <th> FIRST NAME </th>
-    <th> LAST NAME </th>
-    <th> EMAIL </th>
-    <th> TYPE </th>
-  </thead>
-  <tbody>
-    @for(user of data(); track user.id) {
-      <tr (click)="OnRowClick(user)">
-        <td> {{ user.username }} </td>
-        <td> {{ user.first_name }} </td>
-        <td> {{ user.last_name }} </td>
-        <td> {{ user.email }} </td>
-        <td> {{ user.user_type }} </td>
-      </tr>
-    } @empty {
-      <div>
-        Nothing wos found ...
+    <table style="min-width: 100%">
+      <thead>
+        <th>USER NAME</th>
+        <th>FIRST NAME</th>
+        <th>LAST NAME</th>
+        <th>EMAIL</th>
+        <th>TYPE</th>
+      </thead>
+      <tbody>
+        @for(user of data(); track user.id) {
+        <tr (click)="OnRowClick(user)">
+          <td>{{ user.username }}</td>
+          <td>{{ user.first_name }}</td>
+          <td>{{ user.last_name }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.user_type }}</td>
+        </tr>
+        } @empty {
+        <div>Nothing wos found ...</div>
+
+        }
+      </tbody>
+    </table>
+  </div>
+
+  @if(showDetails()) {
+      <div style="min-width: 30%">
+        <div
+        style="
+          height: 50px;
+          align-items: center;
+          display: flex;
+          background-color: beige;
+          justify-content: end;
+          opacity: 0;
+        "
+      >
+
       </div>
-
-    }
-  </tbody>
-</table>
+      <app-user-detail
+        (OnDataSubmited)="OnDataSubmited()"
+        [(user)]="selectedUser"
+        [(showDetails)]="showDetails"
+        style="background-color: aliceblue"
+      ></app-user-detail>
+    </div>
+  }
+</div>

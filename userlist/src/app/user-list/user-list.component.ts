@@ -1,7 +1,8 @@
-import { Component, ModelSignal, OnInit, WritableSignal, inject, model, signal } from '@angular/core';
+import { Component, ModelSignal, OnInit, ViewChild, WritableSignal, inject, model, signal } from '@angular/core';
 import { User } from '../../models/user';
 import { UserDataService } from '../services/user-data.service';
 import { take } from 'rxjs';
+import { ToastService } from '../services/toast-service.service';
 
 @Component({
   selector: 'app-user-list',
@@ -9,11 +10,13 @@ import { take } from 'rxjs';
   styleUrls: ['./user-list.component.scss']
 })
 export class UserListComponent implements OnInit {
-
+  @ViewChild(UserListComponent)
+  list: UserListComponent
   data: WritableSignal<Array<User>> = signal([]);
-  selected = model<User>();
-  showDetails = model<boolean>();
+  selectedUser = signal<User| undefined>(undefined);
+  showDetails = signal<boolean>(false);
   userService = inject(UserDataService)
+  toastService = inject(ToastService)
 
   constructor() { }
 
@@ -28,8 +31,16 @@ export class UserListComponent implements OnInit {
   }
 
   OnRowClick(data: User) {
-    this.selected.set(data);
+    this.selectedUser.set(data);
     this.showDetails.set(true);
   }
 
+  Create() {
+    this.selectedUser.set(undefined);
+    this.showDetails.set(true);
+  }
+
+  OnDataSubmited() {
+    this.Refresh();
+  }
 }

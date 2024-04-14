@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { UserManagerComponent } from './user-manager/user-manager.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { UserListComponent } from './user-list/user-list.component';
 
 const routes: Routes = [
   {
     path: "users",
-    component: UserManagerComponent
+    component: UserListComponent
   },
 
   {
     path: "",
-    component: UserManagerComponent
+    component: UserListComponent
   },
 
   {
