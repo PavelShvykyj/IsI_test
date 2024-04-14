@@ -23,9 +23,8 @@
         </select>
         } @else {
         <input
-          [ngClass]="!!prefixClass() ? prefixClass() : 'no-prefix'"
-          [ngClass]="{'border-danger': !!control && control.dirty && viewErrors()}"
-          class="ui-input"
+          [ngClass]="{'border-danger': !!control && control.dirty && viewErrors(), 'no-prefix': !prefixClass()}"
+          [class]="'ui-input '.concat(prefixClass())"
           [type]="type()"
           [(ngModel)]="value"
           (ngModelChange)="onChange($event)"

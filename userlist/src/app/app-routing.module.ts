@@ -6,7 +6,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
 const routes: Routes = [
   {
     path: "users",
-    component: UserManagerComponent
+    component: UserManagerComponent,
+    title: 'Shvydkyi test task'
   },
 
   {
