@@ -18,12 +18,16 @@
   border-radius: 6px;
 }
 
+.ui-input.border-danger {
+  border: 1px solid var(--unnamed-color-ef7da0);
+}
+
 .no-prefix {
   padding-left: 16px;
 }
 
 .container {
-  height: 85px;
+  height: 81px;
   width: 100%;
 }
 
@@ -36,8 +40,9 @@
 }
 
 .helper-toolbar {
-  height: 13px;
+  height: 9px;
   padding: 0;
+  padding-bottom: 4px;
   width: 100%;
   background: transparent;
   display: flex;

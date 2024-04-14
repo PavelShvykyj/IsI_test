@@ -12,6 +12,7 @@
         @if (type() === 'select') {
         <select
           class="ui-input no-prefix"
+          [ngClass]="{'border-danger': !!control && control.dirty && viewErrors()}"
           [(ngModel)]="value"
           (ngModelChange)="onChange($event)"
           (blur)="onTouched()"
@@ -23,6 +24,7 @@
         } @else {
         <input
           [ngClass]="!!prefixClass() ? prefixClass() : 'no-prefix'"
+          [ngClass]="{'border-danger': !!control && control.dirty && viewErrors()}"
           class="ui-input"
           [type]="type()"
           [(ngModel)]="value"
