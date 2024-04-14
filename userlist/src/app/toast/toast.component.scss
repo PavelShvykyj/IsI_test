@@ -13,20 +13,20 @@
   width: 281px;
   opacity: 1;
   margin-bottom: 17px;
-  font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-13)/var(--unnamed-line-spacing-16) var(--unnamed-font-family-helvetica);
-  letter-spacing: var(--unnamed-character-spacing-0);
-  color: var(--unnamed-color-ffffff);
+  font: var(--font-style-normal) normal var(--font-weight-normal) var(--font-size-13)/var(--line-spacing-16) var(--font-family-helvetica);
+  letter-spacing: var(--character-spacing-0);
+  color: var(--color-ffffff);
   text-align: left;
   border-radius: 6px;
   box-sizing: border-box;
 }
 
 .succes {
-  background: var(--unnamed-color-66bb6a) 0% 0% no-repeat padding-box;
+  background: var(--color-66bb6a) 0% 0% no-repeat padding-box;
   box-shadow: 0px 10px 15px #4CAF505C;
 }
 
 .error {
-  background: var(--unnamed-color-ef7da0) 0% 0% no-repeat padding-box;
-  box-shadow: 0px 10px 15px var(--unnamed-color-ef7da0);
+  background: var(--color-ef7da0) 0% 0% no-repeat padding-box;
+  box-shadow: 0px 10px 15px var(--color-ef7da0);
 }

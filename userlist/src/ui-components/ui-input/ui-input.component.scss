@@ -2,15 +2,15 @@
   border: none;
   outline: none;
   width: 100%;
-  font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-300)
-    var(--unnamed-font-size-13) / var(--unnamed-line-spacing-16)
-    var(--unnamed-font-family-helvetica);
-  letter-spacing: var(--unnamed-character-spacing-0);
-  color: var(--unnamed-color-3f4254);
+  font: var(--font-style-normal) normal var(--font-weight-300)
+    var(--font-size-13) / var(--line-spacing-16)
+    var(--font-family-helvetica);
+  letter-spacing: var(--character-spacing-0);
+  color: var(--color-3f4254);
   text-align: left;
 
   height: 46px;
-  background-color: var(--unnamed-color-f3f6f9);
+  background-color: var(--color-f3f6f9);
   border-radius: 6px;
   opacity: 1;
 
@@ -19,7 +19,7 @@
 }
 
 .ui-input.border-danger {
-  border: 1px solid var(--unnamed-color-ef7da0);
+  border: 1px solid var(--color-ef7da0);
 }
 
 .no-prefix {
@@ -48,11 +48,11 @@
   display: flex;
   align-items: center;
 
-  font: var(--unnamed-font-style-normal) normal
-    var(--unnamed-font-weight-normal) var(--unnamed-font-size-13) /
-    var(--unnamed-line-spacing-16) var(--unnamed-font-family-helvetica);
-  letter-spacing: var(--unnamed-character-spacing-0);
-  color: var(--unnamed-color-3f4254);
+  font: var(--font-style-normal) normal
+    var(--font-weight-normal) var(--font-size-13) /
+    var(--line-spacing-16) var(--font-family-helvetica);
+  letter-spacing: var(--character-spacing-0);
+  color: var(--color-3f4254);
 }
 
 .helper-toolbar_start {
