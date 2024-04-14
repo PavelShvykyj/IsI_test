@@ -1,4 +1,4 @@
-import { Component, OnInit, forwardRef, input, inject, signal, computed } from '@angular/core';
+import { Component, OnInit, forwardRef, input, inject, signal, computed, DestroyRef } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 import {
   AbstractControl,
@@ -39,11 +39,12 @@ export class UiInputComponent implements ControlValueAccessor, OnInit {
   parentErrors = signal<Array<string>>([]);
   viewErrors = computed(()=> {return [...this.controlErrors(), ...this.parentErrors()]})
   prefixClass = input<string>('')
+  destroyRef = inject(DestroyRef)
 
   ngOnInit(): void {
     if (this.controlContainer && this.formControlName()) {
       this.control = this.controlContainer.control!.get(this.formControlName()!);
-      this.control!.statusChanges.pipe(takeUntilDestroyed()).subscribe(status => {
+      this.control!.statusChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(status => {
         if (!!this.control!.errors) {
 
             const keys = Object.keys(this.control!.errors!);
@@ -53,7 +54,7 @@ export class UiInputComponent implements ControlValueAccessor, OnInit {
         }
       })
 
-      this.control!.parent!.statusChanges.pipe(takeUntilDestroyed()).subscribe(status => {
+      this.control!.parent!.statusChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(status => {
         if (!!this.control!.parent?.errors) {
             const keys = Object.keys(this.control!.parent?.errors);
             this.parentErrors.set(keys)
