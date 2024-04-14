@@ -1,7 +1,27 @@
-label {
-  margin-right: 7px;
+.container {
+  width: 100%;
+  height: calc(100vh - 200px);
+  background: var(--unnamed-color-ffffff) 0% 0% no-repeat padding-box;
+  border: 1px solid var(--unnamed-color-ffffff);
+  opacity: 1;
+  border-radius: 6px;
 }
 
-form {
-  max-width: 500px;
+.container__content {
+  padding-left: 26px;
+  padding-right: 26px;
 }
+
+.toolbar__content {
+  padding-left: 26px;
+  padding-right: 26px;
+}
+
+.toobar__title {
+  font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold) var(--unnamed-font-size-16)/var(--unnamed-line-spacing-19) var(--unnamed-font-family-helvetica);
+  letter-spacing: var(--unnamed-character-spacing-0);
+  color: var(--unnamed-color-3f4254);
+  text-align: left;
+}
+
+

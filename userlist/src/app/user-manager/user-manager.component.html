@@ -1,61 +1,27 @@
-
-
-<div style="display: flex">
-  <div style="min-width: 70%; padding-left: 7px">
-    <div
-  style="
-    height: 50px;
-    align-items: center;
-    display: flex;
-    background-color: beige;
-    justify-content: end
-  "
->
-  <button (click)="Create()">Create</button>
-  <button (click)="toastService.succesMessage('succes')"> sucess</button>
-  <button (click)="toastService.errorMessage('error')"> fail</button>
-
-</div>
-    <app-user-list [(showDetails)]="showDetails" [(selected)]="selectedUser"></app-user-list>
-  </div>
-  @if(showDetails()) {
-    <div style="min-width: 30%">
-      <div
-  style="
-    height: 50px;
-    align-items: center;
-    display: flex;
-    background-color: beige;
-    justify-content: end;
-    opacity: 0;
-  "
->
-
-
-</div>
-      <div
-        style="
-          height: 50px;
-          background-color: aliceblue;
-          display: flex;
-          justify-content: space-between;
-        "
-      >
-
-        @if(selectedUser(); as user) {
-        <strong style="margin-right: 7px"> {{ user.first_name }}</strong>
-        <strong> {{ user.last_name }} </strong>
-        }
-
-        <button (click)="Close()">close</button>
+<div class="container">
+  <div class="container__block container__block_size-7">
+    <div class="toolbar">
+      <div class="toolbar__content toolbar__content_end">
+        <button class="app-button app-button_primary" (click)="Create()">
+          Create
+        </button>
       </div>
-      <app-user-detail
-        (OnDataSubmited)="OnDataSubmited()"
-        [(user)]="selectedUser"
-        [(showDetails)]="showDetails"
-        style="background-color: aliceblue"
-      ></app-user-detail>
     </div>
-  }
+    <app-user-list
+      [(showDetails)]="showDetails"
+      [(selected)]="selectedUser"
+    ></app-user-list>
+  </div>
 
+  @if(showDetails()) {
+  <div class="container__block container__block_size-3">
+    <div class="toolbar"></div>
+    <app-user-detail
+      (OnDataSubmited)="OnDataSubmited()"
+      [(user)]="selectedUser"
+      [(showDetails)]="showDetails"
+      style="background-color: aliceblue"
+    ></app-user-detail>
+  </div>
+  }
 </div>

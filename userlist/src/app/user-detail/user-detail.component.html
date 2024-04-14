@@ -1,45 +1,89 @@
-<form [formGroup]="formGroup" (ngSubmit)="Submit()">
-  <div style="margin-top: 4px; margin-bottom: 4px; background-color: azure">
-    <label> login </label>
-    <input UniqueName [itemId]="userId()" formControlName="username" />
-  </div>
-
-  <div style="margin-top: 4px; margin-bottom: 4px; background-color: azure">
-    <label> First</label>
-    <input formControlName="first_name" />
-  </div>
-  <div style="margin-top: 4px; margin-bottom: 4px; background-color: azure">
-    <label>Last </label>
-    <input formControlName="last_name" />
-  </div>
-  <div style="margin-top: 4px; margin-bottom: 4px; background-color: azure">
-    <label>Mail email</label>
-    <input type="email" formControlName="email" />
-  </div>
-
-  <div passwordConfirm formGroupName="passwordGroup">
-    <div style="margin-top: 4px; margin-bottom: 4px; background-color: azure">
-      <label>Pass</label>
-      <input type="password" formControlName="password" />
-    </div>
-
-    <div style="margin-top: 4px; margin-bottom: 4px; background-color: azure">
-      <label> Pass confirm </label>
-      <input type="password" formControlName="passwordConfirm" />
+<div class="container">
+  <div class="toolbar">
+    <div class="toolbar__content" [ngClass]="user() ? 'toolbar__content_between' : 'toolbar__content_end'">
+      @if(user(); as user) {
+      <div class="toolbar__element toobar__title">
+        <span style="margin-right: 7px"> {{ user.first_name }}</span>
+        <span> {{ user.last_name }} </span>
+      </div>
+      }
+      <button class="toolbar__element app-icon-button" (click)="Close()">
+        <img src="../../assets/icons/close-24px.svg" />
+      </button>
     </div>
   </div>
 
-  <div style="margin-top: 4px; margin-bottom: 4px; background-color: azure">
-    <label> usser type </label>
-    <select formControlName="user_type">
-      <option value="Admin">Admin</option>
-      <option value="Driver">Driver</option>
-    </select>
-  </div>
+  <form
+    class="container__content"
+    [formGroup]="formGroup"
+    (ngSubmit)="Submit()"
+  >
 
-  <button type="submit">save</button>
-  @if(!!userId()) {
-    <button (click)="DeleteUser()">Delete</button>
-  }
+      <app-ui-input
+        UniqueName
+        [itemId]="userId()"
+        label="User name"
+        helper="Should be unique"
+        formControlName="username"
+      ></app-ui-input>
 
-</form>
+
+      <app-ui-input
+        label="First name"
+        formControlName="first_name"
+      ></app-ui-input>
+
+
+      <app-ui-input label="Last name" formControlName="last_name">
+      </app-ui-input>
+
+
+      <app-ui-input prefixClass="icon-email"  label="Email" type="email" formControlName="email">
+      </app-ui-input>
+
+
+    <div passwordConfirm formGroupName="passwordGroup">
+
+        <app-ui-input
+          helper="Should contain 1num and 1 char"
+          label="Password"
+          type="password"
+          formControlName="password"
+        ></app-ui-input>
+
+
+
+        <app-ui-input
+          label="Repeat password"
+          type="password"
+          formControlName="passwordConfirm"
+        ></app-ui-input>
+      </div>
+
+
+
+      <app-ui-input
+        label="User type"
+        formControlName="user_type"
+        type="select"
+        [options]="userTypeValues"
+      >
+      </app-ui-input>
+
+
+    <div class="toolbar">
+      <div class="toolbar__content toolbar__content_around">
+        @if(!!userId()) {
+        <button class="app-button app-button_danger" (click)="DeleteUser()">
+          Delete
+        </button>
+        }
+        <button type="submit" class="app-button app-button_primary">
+          @if(!!user()) {
+            Save
+          } @else {Create}
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

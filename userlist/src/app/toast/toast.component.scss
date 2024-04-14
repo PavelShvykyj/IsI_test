@@ -6,26 +6,27 @@
 }
 
 .toast {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   height: 56px;
   width: 281px;
+  opacity: 1;
+  margin-bottom: 17px;
+  font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-13)/var(--unnamed-line-spacing-16) var(--unnamed-font-family-helvetica);
+  letter-spacing: var(--unnamed-character-spacing-0);
+  color: var(--unnamed-color-ffffff);
+  text-align: left;
+  border-radius: 6px;
+  box-sizing: border-box;
 }
 
 .succes {
-  background-color: green;
-  color: white
+  background: var(--unnamed-color-66bb6a) 0% 0% no-repeat padding-box;
+  box-shadow: 0px 10px 15px #4CAF505C;
 }
 
 .error {
   background: var(--unnamed-color-ef7da0) 0% 0% no-repeat padding-box;
   box-shadow: 0px 10px 15px var(--unnamed-color-ef7da0);
-  border-radius: 6px;
-  opacity: 1;
-
-  font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-13)/var(--unnamed-line-spacing-16) var(--unnamed-font-family-helvetica);
-  letter-spacing: var(--unnamed-character-spacing-0);
-  color: var(--unnamed-color-ffffff);
-  text-align: left;
-
-
-
 }

@@ -8,10 +8,11 @@ import { UserManagerComponent } from './user-manager/user-manager.component';
 import { ServerAPI } from '../server/interfaces/server-api.interface';
 import { User } from '../models/user';
 import { UserApiService } from '../server/user-api.service';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastComponent } from './toast/toast.component';
 import { UniqueNameDirective } from './user-detail/validators/unique-name.directive';
 import { PasswordConfirmDirective } from './user-detail/validators/confirm.directive';
+import { UiInputComponent } from '../ui-components/ui-input/ui-input.component';
 
 export const USER_API_PROVIDER = new InjectionToken<ServerAPI<User>>('user-api-provider')
 
@@ -23,12 +24,14 @@ export const USER_API_PROVIDER = new InjectionToken<ServerAPI<User>>('user-api-p
       UserManagerComponent,
       ToastComponent,
       UniqueNameDirective,
-      PasswordConfirmDirective
+      PasswordConfirmDirective,
+      UiInputComponent
    ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [
     {

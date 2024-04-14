@@ -1,20 +1,20 @@
-
-<table style="min-width: 100%;">
-  <thead>
-    <th> USER NAME </th>
-    <th> FIRST NAME </th>
-    <th> LAST NAME </th>
-    <th> EMAIL </th>
-    <th> TYPE </th>
+<div class="container">
+<table class="container__block app-table">
+  <thead class="app-table__container">
+    <th class="app-table__header-element"> <span class="app-table_col-contetnt"> user name </span></th>
+    <th class="app-table__header-element"> <span class="app-table_col-contetnt"> first name </span></th>
+    <th class="app-table__header-element"> <span class="app-table_col-contetnt"> last name </span></th>
+    <th class="app-table__header-element"> <span class="app-table_col-contetnt"> email </span></th>
+    <th class="app-table__header-element"> <span class="app-table_col-contetnt"> type </span></th>
   </thead>
   <tbody>
     @for(user of data(); track user.id) {
-      <tr (click)="OnRowClick(user)">
-        <td> {{ user.username }} </td>
-        <td> {{ user.first_name }} </td>
-        <td> {{ user.last_name }} </td>
-        <td> {{ user.email }} </td>
-        <td> {{ user.user_type }} </td>
+      <tr [ngClass]="{'app-table__row-element_selected': user.id === selected()?.id}" class="app-table__container app-table__row-element" (click)="OnRowClick(user)">
+        <td class="app-table__col-element"> <span class="app-table_col-contetnt"> {{ user.username }} </span> </td>
+        <td class="app-table__col-element"> <span class="app-table_col-contetnt"> {{ user.first_name }} </span></td>
+        <td class="app-table__col-element"> <span class="app-table_col-contetnt"> {{ user.last_name }} </span></td>
+        <td class="app-table__col-element"> <span class="app-table_col-contetnt"> {{ user.email }}</span> </td>
+        <td class="app-table__col-element"> <span class="app-table_col-contetnt"> {{ user.user_type }} </span></td>
       </tr>
     } @empty {
       <div>
@@ -24,3 +24,4 @@
     }
   </tbody>
 </table>
+</div>

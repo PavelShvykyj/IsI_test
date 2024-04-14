@@ -1,0 +1,30 @@
+.container {
+  background: var(--unnamed-color-eef0f8) 0% 0% no-repeat padding-box;
+  display: flex;
+}
+
+.container__block {
+  padding: 10px;
+}
+
+.container__block:first-child {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.container__block:last-child:not(:first-child) {
+  padding-left: 0px;
+  padding-right: 10px;
+}
+
+.container__block_size-7 {
+  width: 70%;
+  max-width: 70%;
+}
+
+.container__block_size-3 {
+  width: 30%;
+  max-width: 30%;
+}
+
+

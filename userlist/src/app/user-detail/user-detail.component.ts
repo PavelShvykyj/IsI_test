@@ -1,3 +1,4 @@
+import { usertype } from './../../types/user-type';
 import {
   Component,
   EventEmitter,
@@ -15,7 +16,6 @@ import {
   Validators,
 } from '@angular/forms';
 import { User } from '../../models/user';
-import { usertype } from '../../types/user-type';
 import { UserDataService } from '../services/user-data.service';
 import { filter, take } from 'rxjs';
 import { ToastService } from '../services/toast-service.service';
@@ -35,6 +35,8 @@ export class UserDetailComponent implements OnInit {
     }
     return '';
   });
+
+  userTypeValues = ["Admin" , "Driver"];
   private toastService = inject(ToastService);
   private userservice = inject(UserDataService);
   private fb = inject(FormBuilder);
