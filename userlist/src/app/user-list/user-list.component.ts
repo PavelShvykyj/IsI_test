@@ -14,6 +14,7 @@ export class UserListComponent implements OnInit {
   selected = model<User>();
   showDetails = model<boolean>();
   userService = inject(UserDataService)
+  showSplash = signal<boolean>(false);
 
   constructor() { }
 
@@ -28,8 +29,19 @@ export class UserListComponent implements OnInit {
   }
 
   OnRowClick(data: User) {
+    const selected = this.selected();
+    if (this.showDetails() && !!selected && data.id !== selected?.id ) {
+      this.hailightSelected()
+      return
+    }
     this.selected.set(data);
     this.showDetails.set(true);
   }
 
+  hailightSelected() {
+    this.showSplash.set(true);
+    setTimeout(() => {
+      this.showSplash.set(false);
+    }, 1000);
+  }
 }

@@ -11,7 +11,7 @@
 
         @if (type() === 'select') {
         <select
-          class="ui-input"
+          class="ui-input no-prefix"
           [(ngModel)]="value"
           (ngModelChange)="onChange($event)"
           (blur)="onTouched()"

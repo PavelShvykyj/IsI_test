@@ -5,6 +5,7 @@
   border: 1px solid var(--unnamed-color-ffffff);
   opacity: 1;
   border-radius: 6px;
+  overflow-y: auto;
 }
 
 .container__block {
@@ -46,8 +47,13 @@
 
 .app-table__row-element.app-table__row-element_selected {
   background: var(--unnamed-color-eff0f4) 0% 0% no-repeat padding-box;
+  transition: background-color 0.5s ease;
 }
 
+.app-table__row-element.app-table__row-element_selected.app-table__row-element_splashed {
+  background-color: #2e8ff0a6;
+  transition: background-color 1s ease;
+}
 
 .app-table_col-contetnt {
   padding-left: 7px;
