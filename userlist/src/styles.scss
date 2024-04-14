@@ -1,1 +1,100 @@
 /* You can add global styles to this file, and also import other style files */
+@import "./theme/variables.scss";
+
+@font-face {
+  font-family: "Helvetica";
+  src: url("./assets/fonts/Halvetica/Helvetica.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.toolbar {
+  height: 78px;
+}
+
+.toolbar__content {
+  padding-top: 16px;
+  padding-bottom: 16px;
+  align-items: center;
+  display: flex;
+  box-sizing: border-box;
+  height: 100%;
+}
+
+.toolbar__content_end {
+  justify-content: end;
+}
+
+.toolbar__content_around {
+  justify-content: space-around;
+}
+
+.toolbar__content_between {
+  justify-content: space-between;
+}
+
+.app-button {
+  width: 120px;
+  height: 46px;
+  border-radius: 6px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font: var(--font-style-normal) normal
+    var(--font-weight-normal) var(--font-size-14)
+    var(--font-family-helvetica);
+  letter-spacing: var(--character-spacing-0);
+}
+
+.app-icon-button {
+  background: transparent;
+  border: none;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1px;
+  box-sizing: border-box;
+}
+
+.app-button_primary {
+  background: var(--color-2e8ff0) 0% 0% no-repeat padding-box;
+  box-shadow: 0px 5px 8px #2e8ff029;
+  color: var(--color-ffffff);
+}
+
+.app-button_danger {
+  background: var(--color-f44682) 0% 0% no-repeat padding-box;
+  box-shadow: 0px 5px 8px #f4468229;
+  color: var(--color-ffffff);
+}
+
+.text-danger {
+  font: var(--font-style-normal) normal
+    var(--font-weight-normal) var(--font-size-13) /
+    var(--line-spacing-16) var(--font-family-helvetica);
+  letter-spacing: var(--character-spacing-0);
+  color: var(--color-ef7da0);
+  text-align: left;
+}
+
+.text-primary {
+  font: var(--font-style-normal) normal
+    var(--font-weight-normal) var(--font-size-13) /
+    var(--line-spacing-16) var(--font-family-helvetica);
+  letter-spacing: var(--character-spacing-0);
+  color: var(--color-2e8ff0);
+  text-align: left;
+}
+
+.icon-email {
+  padding-left: 48px;
+  background-image: url("./assets/icons/alternate_email_black_24dp.svg");
+  background-repeat: no-repeat;
+  background-size: 24px;
+  background-position: 16px 50%;
+}
+

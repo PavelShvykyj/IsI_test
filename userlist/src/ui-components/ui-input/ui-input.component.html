@@ -1,0 +1,61 @@
+<div class="container">
+  <div class="container__content">
+    <div class="helper-toolbar">
+      <small>{{ this.label() }}</small>
+      @if(control?.hasValidator(required)) {
+      <small>*</small>
+      }
+    </div>
+    <div class="input-wrapper">
+
+
+        @if (type() === 'select') {
+        <select
+          class="ui-input no-prefix"
+          [ngClass]="{'border-danger': !!control && control.dirty && viewErrors()}"
+          [(ngModel)]="value"
+          (ngModelChange)="onChange($event)"
+          (blur)="onTouched()"
+        >
+          @for (option of options(); track $index) {
+          <option [value]="option">{{ option }}</option>
+          }
+        </select>
+        } @else {
+        <input
+          [ngClass]="{'border-danger': !!control && control.dirty && viewErrors(), 'no-prefix': !prefixClass()}"
+          [class]="'ui-input '.concat(prefixClass())"
+          [type]="type()"
+          [(ngModel)]="value"
+          (ngModelChange)="onChange($event)"
+          (blur)="onTouched()"
+        />
+        }
+
+    </div>
+
+    <div class="helper-toolbar helper-toolbar_start">
+      @if (this.helper(); as helper) {
+      <div>
+        <small> {{ helper }} </small>
+      </div>
+      }
+      <span style="margin: auto;"></span>
+      @if (control?.hasAsyncValidator && control?.status === 'PENDING') {
+      <div>
+        <small class="text-primary"> checking validity ... </small>
+      </div>
+      }
+      <span style="margin: auto;"></span>
+      @if(!!control && control.dirty && viewErrors(); as items) {
+      <div style="display: flex; justify-content: end">
+        @for (item of items; track $index) {
+        <div class="pl-4">
+          <small class="text-danger"> {{ item }} </small>
+        </div>
+        }
+      </div>
+      }
+    </div>
+  </div>
+</div>

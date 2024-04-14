@@ -1,0 +1,53 @@
+<div class="container">
+  <table class="container__block app-table">
+    <thead class="app-table__container">
+      <th class="app-table__header-element">
+        <span class="app-table_col-contetnt"> user name </span>
+      </th>
+      <th class="app-table__header-element">
+        <span class="app-table_col-contetnt"> first name </span>
+      </th>
+      <th class="app-table__header-element">
+        <span class="app-table_col-contetnt"> last name </span>
+      </th>
+      <th class="app-table__header-element">
+        <span class="app-table_col-contetnt"> email </span>
+      </th>
+      <th class="app-table__header-element">
+        <span class="app-table_col-contetnt"> type </span>
+      </th>
+    </thead>
+    <tbody>
+      @for(user of data(); track user.id) {
+      <tr
+        [ngClass]="{
+          'app-table__row-element_selected': user.id === selected()?.id,
+          'app-table__row-element_splashed': !!showSplash()
+        }"
+
+        class="app-table__container app-table__row-element"
+        (click)="OnRowClick(user)"
+      >
+        <td class="app-table__col-element">
+          <span class="app-table_col-contetnt"> {{ user.username }} </span>
+        </td>
+        <td class="app-table__col-element">
+          <span class="app-table_col-contetnt"> {{ user.first_name }} </span>
+        </td>
+        <td class="app-table__col-element">
+          <span class="app-table_col-contetnt"> {{ user.last_name }} </span>
+        </td>
+        <td class="app-table__col-element">
+          <span class="app-table_col-contetnt"> {{ user.email }}</span>
+        </td>
+        <td class="app-table__col-element">
+          <span class="app-table_col-contetnt"> {{ user.user_type }} </span>
+        </td>
+      </tr>
+      } @empty {
+      <div>Nothing wos found ...</div>
+
+      }
+    </tbody>
+  </table>
+</div>

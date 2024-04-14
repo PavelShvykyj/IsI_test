@@ -1,0 +1,32 @@
+.container {
+  width: 100%;
+  height: calc(100vh - 200px);
+  background: var(--color-ffffff) 0% 0% no-repeat padding-box;
+  border: 1px solid var(--color-ffffff);
+  opacity: 1;
+  border-radius: 6px;
+  overflow-y: auto;
+}
+
+.container__content {
+  padding-left: 26px;
+  padding-right: 26px;
+}
+
+.toolbar__content {
+  padding-left: 26px;
+  padding-right: 26px;
+}
+
+.toolbar__content.toolbar__content_no-padding {
+  padding: 0px;
+}
+
+.toobar__title {
+  font: var(--font-style-normal) normal var(--font-weight-bold) var(--font-size-16)/var(--line-spacing-19) var(--font-family-helvetica);
+  letter-spacing: var(--character-spacing-0);
+  color: var(--color-3f4254);
+  text-align: left;
+}
+
+

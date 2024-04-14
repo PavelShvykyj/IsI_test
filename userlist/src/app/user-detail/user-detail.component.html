@@ -1,0 +1,89 @@
+<div class="container">
+  <div class="toolbar">
+    <div class="toolbar__content" [ngClass]="user() ? 'toolbar__content_between' : 'toolbar__content_end'">
+      @if(user(); as user) {
+      <div class="toolbar__element toobar__title">
+        <span style="margin-right: 7px"> {{ user.first_name }}</span>
+        <span> {{ user.last_name }} </span>
+      </div>
+      }
+      <button class="toolbar__element app-icon-button" (click)="Close()">
+        <img src="../../assets/icons/close-24px.svg" />
+      </button>
+    </div>
+  </div>
+
+  <form
+    class="container__content"
+    [formGroup]="formGroup"
+    (ngSubmit)="Submit()"
+  >
+
+      <app-ui-input
+        UniqueName
+        [itemId]="userId()"
+        label="User name"
+        helper="Should be unique"
+        formControlName="username"
+      ></app-ui-input>
+
+
+      <app-ui-input
+        label="First name"
+        formControlName="first_name"
+      ></app-ui-input>
+
+
+      <app-ui-input label="Last name" formControlName="last_name">
+      </app-ui-input>
+
+
+      <app-ui-input prefixClass="icon-email"  label="Email" type="email" formControlName="email">
+      </app-ui-input>
+
+
+    <div passwordConfirm formGroupName="passwordGroup">
+
+        <app-ui-input
+          helper="Should contain 1num and 1 char"
+          label="Password"
+          type="password"
+          formControlName="password"
+        ></app-ui-input>
+
+
+
+        <app-ui-input
+          label="Repeat password"
+          type="password"
+          formControlName="passwordConfirm"
+        ></app-ui-input>
+      </div>
+
+
+
+      <app-ui-input
+        label="User type"
+        formControlName="user_type"
+        type="select"
+        [options]="userTypeValues"
+      >
+      </app-ui-input>
+
+
+    <div class="toolbar">
+      <div class="toolbar__content toolbar__content_around toolbar__content_no-padding">
+        @if(!!userId()) {
+        <button class="app-button app-button_danger" (click)="DeleteUser()">
+          Delete
+        </button>
+        }
+        <button type="submit" class="app-button app-button_primary">
+          @if(!!user()) {
+            Save
+          } @else {Create}
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="container__block container__block_size-7">
+    <div class="toolbar">
+      <div class="toolbar__content toolbar__content_end">
+        <button class="app-button app-button_primary" (click)="Create()">
+          Create
+        </button>
+      </div>
+    </div>
+    <app-user-list
+      [(showDetails)]="showDetails"
+      [(selected)]="selectedUser"
+    ></app-user-list>
+  </div>
+
+  @if(showDetails()) {
+  <div class="container__block container__block_size-3">
+    <div class="toolbar"></div>
+    <app-user-detail
+      (OnDataSubmited)="OnDataSubmited()"
+      [(user)]="selectedUser"
+      [(showDetails)]="showDetails"
+      style="background-color: aliceblue"
+    ></app-user-detail>
+  </div>
+  }
+</div>

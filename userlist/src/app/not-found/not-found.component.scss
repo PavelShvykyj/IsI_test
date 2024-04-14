@@ -1,0 +1,33 @@
+.container{
+  position: absolute;
+  top: calc(50% - 200px);
+  left: calc(50% - 200px);
+  height: 200px;
+  width: 200px;
+}
+
+.container__content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-content: center;
+  justify-items: center;
+  flex-direction: column;
+  background: var(--color-ef7da0) 0% 0% no-repeat padding-box;
+  box-shadow: 0px 10px 15px var(--color-ef7da0);
+  font-family: var(--font-family-helvetica);
+}
+
+.container__element {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+h1.container__element {
+  height: 150px;
+}
+
+h4.container__element {
+  height: 50px;
+}
