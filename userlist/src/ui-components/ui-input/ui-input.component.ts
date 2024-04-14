@@ -1,4 +1,5 @@
 import { Component, OnInit, forwardRef, input, inject, signal, computed } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 import {
   AbstractControl,
   ControlContainer,
@@ -42,7 +43,7 @@ export class UiInputComponent implements ControlValueAccessor, OnInit {
   ngOnInit(): void {
     if (this.controlContainer && this.formControlName()) {
       this.control = this.controlContainer.control!.get(this.formControlName()!);
-      this.control!.statusChanges.pipe().subscribe(status => {
+      this.control!.statusChanges.pipe(takeUntilDestroyed()).subscribe(status => {
         if (!!this.control!.errors) {
 
             const keys = Object.keys(this.control!.errors!);
@@ -52,7 +53,7 @@ export class UiInputComponent implements ControlValueAccessor, OnInit {
         }
       })
 
-      this.control!.parent!.statusChanges.pipe().subscribe(status => {
+      this.control!.parent!.statusChanges.pipe(takeUntilDestroyed()).subscribe(status => {
         if (!!this.control!.parent?.errors) {
             const keys = Object.keys(this.control!.parent?.errors);
             this.parentErrors.set(keys)
