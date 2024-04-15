@@ -89,7 +89,7 @@ export class UserDetailComponent implements OnInit {
   ngOnInit() {}
 
   Submit() {
-    if (this.formGroup.invalid) {
+    if (this.formGroup.invalid || this.formGroup.get('username')?.status === 'PENDING') {
       this.toastService.errorMessage('Form filled iccorrectly...');
       return;
     }
