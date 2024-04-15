@@ -53,7 +53,7 @@ export class UserDetailComponent implements OnInit {
         {
           validators: [
             Validators.required,
-            Validators.minLength(2),
+            Validators.minLength(8),
             Validators.pattern(RegExp('^(?=.*[0-9])(?=.*[a-z])([a-z0-9_-]+)$')),
           ],
           updateOn: 'blur',
